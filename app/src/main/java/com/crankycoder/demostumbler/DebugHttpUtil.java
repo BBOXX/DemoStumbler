@@ -62,12 +62,14 @@ public class DebugHttpUtil implements IHttpUtil {
     @Override
     public IResponse post(String urlString, byte[] data, Map<String, String> headers, boolean precompressed) {
         if (precompressed) {
-            try {
-                String newData = Zipper.unzipData(data);
+            String newData = Zipper.unzipData(data);
+
+            if (newData != null)
                 Log.i(LOG_TAG, "POST " + urlString+ "|" + headers.toString() + "|" + newData);
-            } catch (IOException e) {
+            else
+            {
                 Log.i(LOG_TAG, "POST " + urlString+ "|" + headers.toString() + "|" + data.toString());
-                Log.w(LOG_TAG, "Error unzipping: " + e.toString());
+                Log.w(LOG_TAG, "Error unzipping data");
             }
          }
 

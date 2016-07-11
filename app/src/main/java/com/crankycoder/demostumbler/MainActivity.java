@@ -12,6 +12,7 @@ import android.widget.Button;
 import org.mozilla.mozstumbler.service.core.http.IHttpUtil;
 import org.mozilla.mozstumbler.service.core.http.ILocationService;
 import org.mozilla.mozstumbler.service.mainthread.PassiveServiceReceiver;
+import org.mozilla.mozstumbler.service.stumblerthread.datahandling.IDataStorageManager;
 import org.mozilla.mozstumbler.service.stumblerthread.datahandling.DataStorageManager;
 import org.mozilla.mozstumbler.service.uploadthread.UploadAlarmReceiver;
 import org.mozilla.mozstumbler.svclocator.ServiceConfig;
@@ -116,18 +117,14 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View view) {
                 Log.i(LOG_TAG, "Button was clicked!");
 
-                DataStorageManager manager = DataStorageManager.getInstance();
+                IDataStorageManager manager = DataStorageManager.getInstance();
                 if (manager == null) {
                     Log.i(LOG_TAG, "Can't acquire DSM!");
                     return;
                 }
-                try {
-                    manager.saveCurrentReportsToDisk();
-                    Log.i(LOG_TAG, "Saved reports to disk!");
-                } catch (IOException ioException) {
-                    Log.e(LOG_TAG, ioException.toString());
-                }
-            }
+                manager.saveCachedReportsToDisk();
+                Log.i(LOG_TAG, "Saved reports to disk!");
+ls             }
         });
     }
 
