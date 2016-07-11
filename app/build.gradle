@@ -14,7 +14,9 @@ apply plugin: 'com.android.application'
 
 repositories {
    // jcenter()
+    maven { url "file:///Users/bryn/Develop/BBOXX/mavenrepo" }
     maven { url "http://dl.bintray.com/crankycoder/libMozStumbler" }
+
 }
 
 android {
@@ -40,6 +42,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:support-v4:21.0.+"
     compile 'com.android.support:appcompat-v7:19.1.0'
-    compile 'org.mozilla.mozstumbler:stumbler:1.7.10'
+    compile 'uk.co.bboxx.mozstumbler:stumbler:0.0.1'
+    //compile 'org.mozilla.mozstumbler:stumbler:1.7.10'
 }
 
